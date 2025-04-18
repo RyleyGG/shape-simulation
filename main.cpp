@@ -13,7 +13,35 @@ class ParamObj {
 };
 constexpr auto param_obj = ParamObj();
 
-void draw_circle() {}
+void draw_circle() {
+    system("cls");
+    std::cout << std::endl; // buffer top of shape
+    const int radius = 10;
+    const int diameter = radius * 2;
+
+    // mapping each point of the circle
+    // distance from center of circle to given point is x^2 + y^2
+    for (int y = 0; y <= diameter; y++) {
+        std::cout << "     "; // buffer left-side of shape
+        for (int x = 0; x <= diameter; x++) {
+            int dx = x - radius;
+            int dy = y - radius;
+            float distance = std::sqrt(dx * dx + dy * dy);
+
+            // For a continuous circle, distance == circle for the edge
+            // Since output characters are discrete, we approximate this with an upper threshold
+            if (std::abs(distance - radius) < 0.5) {
+                std::cout << "%";
+            }
+            else {
+                std::cout << " ";
+            }
+        }
+
+        // After each line, print newline to begin next portion of circle
+        std::cout << std::endl;
+    }
+}
 
 
 void draw_square() {}
